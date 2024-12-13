@@ -260,7 +260,7 @@ namespace nezhaV2 {
      */
     //% group="Basic functions"
     //% weight=403
-    //% block="set the speed of %NezhaV2MotorPostion to %speed\\%, and start the motor"
+    //% block="set the speed of %NezhaV2MotorPostion to %speed\\% and start the motor"
     //% speed.min=-100  speed.max=100
     export function nezha2MotorSpeedCtrolExport(motor: NezhaV2MotorPostion, speed: number): void {
         motorDelay(motor, 0, 1)
@@ -318,7 +318,7 @@ namespace nezhaV2 {
     //% weight=402
     //%block="%NezhaV2MotorPostion relative angular value"
     export function readServoRelativePostion(motor: NezhaV2MotorPostion): number {
-        return readPos(motor) - relativeAngularArr[motor - 1];
+        return (readPos(motor) - relativeAngularArr[motor - 1]) * 0.1;
     }
 
     export function readPos(motor: NezhaV2MotorPostion): number {
@@ -547,7 +547,7 @@ namespace nezhaV2 {
      */
     //% group="Application functions"
     //% weight=402
-    //%block="set the left wheel speed at %speedleft \\%, right wheel speed at %speedright \\%, and start the motor"
+    //%block="set the left wheel speed at %speedleft \\%, right wheel speed at %speedright \\% and start the motor"
     //% speedleft.min=-100  speedleft.max=100 speedright.min=-100  speedright.max=100
     export function setSpeedfLeftRightWheel(speedleft: number, speedright: number): void {
         let leftDir = NezhaV2MovementDirection.CCW

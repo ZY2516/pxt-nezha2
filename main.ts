@@ -338,7 +338,7 @@ namespace nezhaV2 {
     }
     //% group="Basic functions"
     //% weight=399
-    //%block="set motor %NezhaV2MotorPostion relative angular to zero"
+    //%block="set servo %NezhaV2MotorPostion relative angular to zero"
     export function servoRelativePostionReset(motor: NezhaV2MotorPostion) {
         relativeAngularArr[motor - 1] = readPos(motor);
     }
@@ -377,7 +377,7 @@ namespace nezhaV2 {
      */
     //% group="Basic functions"
     //% weight=399
-    //%block="set motor %NezhaV2MotorPostion to zero"
+    //%block="set servo %NezhaV2MotorPostion to zero"
     export function servoPostionReset(motor: NezhaV2MotorPostion): void {
         motorDelay(motor, 1, 1)
         let buf = pins.createBuffer(8)

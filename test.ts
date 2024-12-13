@@ -13,7 +13,7 @@ input.onButtonPressed(Button.A, function () {
     // Move NezhaV2 motor M1 to the absolute position 0, in clockwise direction
     nezhaV2.goToAbsolutePosition(NezhaV2MotorPostion.M1, NezhaV2ServoMotionMode.CW, 0)
     // Start NezhaV2 motor M1, in clockwise direction
-    nezhaV2.nezha2MotorStart(NezhaV2MotorPostion.M1, NezhaV2MovementDirection.CW)
+    //nezhaV2.nezha2MotorStart(NezhaV2MotorPostion.M1, NezhaV2MovementDirection.CW)
     // Set the speed control output of NezhaV2 motor M1 to 66 (assuming this is a valid value for speed control)
     nezhaV2.nezha2MotorSpeedCtrolExport(NezhaV2MotorPostion.M1, 66)
     // Display the current absolute position of NezhaV2 motor M1

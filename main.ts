@@ -264,7 +264,6 @@ namespace nezhaV2 {
     //% speed.min=-100  speed.max=100
     export function nezha2MotorSpeedCtrolExport(motor: NezhaV2MotorPostion, speed: number): void {
         motorDelay(motor, 0, 1)
-        let dir = NezhaV2MovementDirection.CW
         let buf = pins.createBuffer(8)
         buf[0] = 0xFF;
         buf[1] = 0xF9;
@@ -274,14 +273,12 @@ namespace nezhaV2 {
         }
         else {
             buf[3] = NezhaV2MovementDirection.CCW;
-            dir = NezhaV2MovementDirection.CCW
         }
         buf[4] = 0x60;
         buf[5] = Math.abs(speed);
         buf[6] = 0xF5;
         buf[7] = 0x00;
         pins.i2cWriteBuffer(i2cAddr, buf);
-        nezha2MotorSpeedCtrol(motor, dir, speed)
     }
 
     export function nezha2MotorSpeedCtrol(motor: NezhaV2MotorPostion, direction: NezhaV2MovementDirection, speed: number): void {

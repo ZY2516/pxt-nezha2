@@ -107,6 +107,13 @@ namespace nezhaV2 {
     let motorRightGlobal = 0
     let degreeToDistance = 0
 
+    export function delayMs(ms: number): void {
+        let time = input.runningTime() + ms
+        while (time >= input.runningTime()) {
+
+        }
+    }
+
 
     export function motorDelay(motor: NezhaV2MotorPostion, speed: number, motorFunction: NezhaV2SportsMode) {
 
@@ -319,6 +326,7 @@ namespace nezhaV2 {
     }
 
     export function readPos(motor: NezhaV2MotorPostion): number {
+        basic.pause(4);
         let buf = pins.createBuffer(8);
         buf[0] = 0xFF;
         buf[1] = 0xF9;
@@ -329,7 +337,7 @@ namespace nezhaV2 {
         buf[6] = 0xF5;
         buf[7] = 0x00;
         pins.i2cWriteBuffer(i2cAddr, buf);
-        basic.pause(4);
+        delayMs(3)
         let arr = pins.i2cReadBuffer(i2cAddr, 4);
         return (arr[3] << 24) | (arr[2] << 16) | (arr[1] << 8) | (arr[0]);
     }
@@ -350,6 +358,7 @@ namespace nezhaV2 {
     //% weight=400
     //%block="%NezhaV2MotorPostion speed (laps/sec)"
     export function readServoAbsoluteSpeed(motor: NezhaV2MotorPostion): number {
+        basic.pause(4);
         let buf = pins.createBuffer(8)
         buf[0] = 0xFF;
         buf[1] = 0xF9;
@@ -360,7 +369,7 @@ namespace nezhaV2 {
         buf[6] = 0xF5;
         buf[7] = 0x00;
         pins.i2cWriteBuffer(i2cAddr, buf);
-        basic.pause(3);
+        delayMs(3)
         let ServoSpeed1Arr = pins.i2cReadBuffer(i2cAddr, 2);
         let Servo1Speed = (ServoSpeed1Arr[1] << 8) | (ServoSpeed1Arr[0]);
         return Math.floor(Servo1Speed * 0.0926);

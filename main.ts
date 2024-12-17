@@ -447,11 +447,10 @@ namespace nezhaV2 {
     //% speed.min=0  speed.max=100
     export function combinationMotorNezhaV2VerticallDirectionMove(speed: number, verticallDirection: NezhaV2VerticallDirection): void {
         if(speed < 0){
-            speed = 1;
+            speed = 0;
         }else if(speed > 100){
             speed = 100;
         }
-        serial.writeNumber(speed)
         switch (verticallDirection) {
             case NezhaV2VerticallDirection.Up:
                 nezha2MotorSpeedCtrol(motorLeftGlobal, NezhaV2MovementDirection.CCW, speed)

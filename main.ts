@@ -446,6 +446,12 @@ namespace nezhaV2 {
     //%block="Set %speed\\% speed and move %NezhaV2VerticallDirection"
     //% speed.min=0  speed.max=100
     export function combinationMotorNezhaV2VerticallDirectionMove(speed: number, verticallDirection: NezhaV2VerticallDirection): void {
+        if(speed < 0){
+            speed = 1;
+        }else if(speed > 100){
+            speed = 100;
+        }
+        serial.writeNumber(speed)
         switch (verticallDirection) {
             case NezhaV2VerticallDirection.Up:
                 nezha2MotorSpeedCtrol(motorLeftGlobal, NezhaV2MovementDirection.CCW, speed)
@@ -556,24 +562,18 @@ namespace nezhaV2 {
     //%block="set the left wheel speed at %speedleft \\%, right wheel speed at %speedright \\% and start the motor"
     //% speedleft.min=-100  speedleft.max=100 speedright.min=-100  speedright.max=100
     export function setSpeedfLeftRightWheel(speedleft: number, speedright: number): void {
-        let leftDir = NezhaV2MovementDirection.CCW
-        let rightDir = NezhaV2MovementDirection.CW
         if (speedleft > 0) {
             nezha2MotorSpeedCtrol(motorLeftGlobal, NezhaV2MovementDirection.CCW, speedleft)
         }
         else {
             nezha2MotorSpeedCtrol(motorLeftGlobal, NezhaV2MovementDirection.CW, Math.abs(speedleft))
-            leftDir = NezhaV2MovementDirection.CW
         }
         if (speedright > 0) {
             nezha2MotorSpeedCtrol(motorRightGlobal, NezhaV2MovementDirection.CW, speedright)
         }
         else {
             nezha2MotorSpeedCtrol(motorRightGlobal, NezhaV2MovementDirection.CCW, Math.abs(speedright))
-            rightDir = NezhaV2MovementDirection.CCW
         }
-        nezha2MotorSpeedCtrol(motorLeftGlobal, leftDir, speedleft)
-        nezha2MotorSpeedCtrol(motorRightGlobal, rightDir, speedright)
     }
 
     /**

@@ -29,6 +29,8 @@
     "nezhaV2.nezha2MotorSpeedCtrolExport|block": "%NezhaV2MotorPostion의 속도를 %speed \\%로 설정",
     "nezhaV2.setServoSpeed|block": "서보모터 속도를 %speed \\%로 설정",
     "nezhaV2.readServoAbsolutePostion|block": "%NezhaV2MotorPostion의 각도 값",
+    "nezhaV2.readServoRelativePostion|block": "%NezhaV2MotorPostion 의 상대적 각도",
+    "nezhaV2.servoRelativePostionReset|block": "모터 %NezhaV2MotorPostion 의 상대각을 0으로 설정함",
     "nezhaV2.readServoAbsoluteSpeed|block": "%NezhaV2MotorPostion의 속도 값",
     "nezhaV2.servoPostionReset|block": "%NezhaV2MotorPostion 모터 각도를 0으로 설정",
     "nezhaV2.runningMotorToeSpeed|block": "왼쪽 모터를 %NezhaV2MotorPostionLeft 오른쪽 모터를 %NezhaV2MotorPostionRight로 설정",

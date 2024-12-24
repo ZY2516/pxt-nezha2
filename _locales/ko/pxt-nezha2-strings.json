@@ -41,7 +41,7 @@
     "nezhaV2.combinationMotorNezhaV2VerticallDirectionMove|block": "모터 속도를 로%speed\\% 하고 %NezhaV2VerticallDirection",
     "nezhaV2.CombinationServoNezhaV2VerticallDirectionMove|block": "%NezhaV2VerticallDirection 이동 %speed  %NezhaV2SportsMode",
     "nezhaV2.SetMotorOneRotateRevolution|block": "모터 한 바퀴 회전하고 %far %Unit로 설정하기",
-    "nezhaV2.CombinationServoVerticallDirectionMove|block": "%VerticallDirection %speed %SportsMode로 조합 모터 이동",
+    "nezhaV2.CombinationServoVerticallDirectionMove|block": "%VerticallDirection %speed %SportsMode로 모든 모터 이동",
     "nezhaV2.setSpeedfLeftRightWheel|block": "왼쪽 모터 속도를 %speedleft \\%로, 오른쪽 모터 속도를 %speedright \\%로 설정",
     "nezhaV2.readVersion|block": "버전 번호",
     "{id:group}Basic functions": "기본 함수",

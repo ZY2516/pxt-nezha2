@@ -38,7 +38,7 @@
     "nezhaV2.CombinationMotorSpeed|block": "에%HorizontalDirection이동 %horizontalDirection %NezhaV2SportsMode",
     "nezhaV2.CombinationServoSpeed|block": "다음 방향으로%horizontalDirection이동 ",
     "nezhaV2.stopCombinationMotor|block": "모든 모터 멈추기",
-    "nezhaV2.combinationMotorNezhaV2VerticallDirectionMove|block": "모터 속도를 로%speed\\% 하고 %NezhaV2VerticallDirection",
+    "nezhaV2.combinationMotorNezhaV2VerticallDirectionMove|block": "모터 속도를 %speed\\% 로하고 %NezhaV2VerticallDirection",
     "nezhaV2.CombinationServoNezhaV2VerticallDirectionMove|block": "%NezhaV2VerticallDirection 이동 %speed  %NezhaV2SportsMode",
     "nezhaV2.SetMotorOneRotateRevolution|block": "모터 한 바퀴 회전하고 %far %Unit로 설정하기",
     "nezhaV2.CombinationServoVerticallDirectionMove|block": "%VerticallDirection %speed %SportsMode로 모든 모터 이동",

@@ -472,6 +472,7 @@ namespace nezhaV2 {
     //% group="Application functions"
     //% weight=403
     //%block="Combination Motor Move at %speed to %VerticallDirection %value %SportsMode "
+    //% speed.min=0  speed.max=100
     export function CombinationServoVerticallDirectionMove(speed: number, verticallDirection: NezhaV2VerticallDirection, value: number, MotorFunction: NezhaV2NezhaV2DistanceAndAngleUnit): void {
         setServoSpeed(speed)
         let motorFunction;

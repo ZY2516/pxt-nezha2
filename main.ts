@@ -114,27 +114,26 @@ namespace nezhaV2 {
         }
     }
 
-
     export function motorDelay(motor: NezhaV2MotorPostion, speed: number, motorFunction: NezhaV2SportsMode) {
 
         let now = input.runningTime();
-        let motorWorkdoneTime = motorWorkdoneTimeArr[motor];
+        let motorWorkdoneTime = motorWorkdoneTimeArr[motor - 1];
         if (now < motorWorkdoneTime) {
             basic.pause(motorWorkdoneTime - now);
             now = input.runningTime();
         }
 
         if (speed == 0 || servoSpeedGlobal == 0) {
-            motorWorkdoneTimeArr[motor] = 0;
+            motorWorkdoneTimeArr[motor - 1] = 0;
             return;
         }
 
         if (motorFunction == NezhaV2SportsMode.Circle) {
-            motorWorkdoneTimeArr[motor] = now + speed * 360000.0 / servoSpeedGlobal + 500;
+            motorWorkdoneTimeArr[motor - 1] = now + speed * 360000.0 / servoSpeedGlobal + 500;
         } else if (motorFunction == NezhaV2SportsMode.Second) {
-            motorWorkdoneTimeArr[motor] = now + (speed * 1000);
+            motorWorkdoneTimeArr[motor - 1] = now + (speed * 1000);
         } else if (motorFunction == NezhaV2SportsMode.Degree) {
-            motorWorkdoneTimeArr[motor] = now + speed * 1000.0 / servoSpeedGlobal + 500;
+            motorWorkdoneTimeArr[motor -] = now + speed * 1000.0 / servoSpeedGlobal + 500;
         }
 
     }
@@ -149,25 +148,26 @@ namespace nezhaV2 {
      * @returns This function does not return any value.
      */
     //% group="Basic functions"
-    //% block="set %NezhaV2MotorPostion to run %NezhaV2MovementDirection %speed  %NezhaV2SportsMode || %delayMode"
+    //% block="set %NezhaV2MotorPostion at %speed to run %NezhaV2MovementDirection %value  %NezhaV2SportsMode || %delayMode"
     //% inlineInputMode=inline
     //% weight=407 
-    export function motorSpeed(motor: NezhaV2MotorPostion, direction: NezhaV2MovementDirection, speed: number, motorFunction: NezhaV2SportsMode, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
+    export function motorSpeed(motor: NezhaV2MotorPostion, speed: number, direction: NezhaV2MovementDirection, motorFunction: NezhaV2SportsMode, value: number, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
         if (delayMode) {
-            motorDelay(motor, speed, motorFunction);
+            motorDelay(motor, value, motorFunction);
         }
         else {
             motorDelay(motor, 0, 1)
         }
+        setServoSpeed(speed)
         let buf = pins.createBuffer(8);
         buf[0] = 0xFF;
         buf[1] = 0xF9;
         buf[2] = motor;
         buf[3] = direction;
         buf[4] = 0x70;
-        buf[5] = (speed >> 8) & 0XFF;
+        buf[5] = (value >> 8) & 0XFF;
         buf[6] = motorFunction; 
-        buf[7] = (speed >> 0) & 0XFF;
+        buf[7] = (value >> 0) & 0XFF;
         pins.i2cWriteBuffer(i2cAddr, buf);
     }
 
@@ -404,7 +404,7 @@ namespace nezhaV2 {
     //%block="Set the servo speed to  %speed \\%"
     //% speed.min=0  speed.max=100
 
-    export function setServoSpeed(speed: number): void {
+    function setServoSpeed(speed: number): void {
         speed *= 9
         servoSpeedGlobal = speed
         let buf = pins.createBuffer(8)
@@ -492,38 +492,39 @@ namespace nezhaV2 {
 
     //% group="Application functions"
     //% weight=403
-    //%block="Combination Motor Move to %VerticallDirection %speed %SportsMode "
-    export function CombinationServoVerticallDirectionMove(verticallDirection: NezhaV2VerticallDirection, speed: number, MotorFunction: NezhaV2NezhaV2DistanceAndAngleUnit): void {
+    //%block="Combination Motor Move at %speed to %VerticallDirection %value %SportsMode "
+    export function CombinationServoVerticallDirectionMove(speed: number, verticallDirection: NezhaV2VerticallDirection, value: number, MotorFunction: NezhaV2NezhaV2DistanceAndAngleUnit): void {
+        setServoSpeed(speed)
         switch (MotorFunction) {
             case NezhaV2NezhaV2DistanceAndAngleUnit.Circle:
                 if (verticallDirection == NezhaV2VerticallDirection.Up) {
-                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, speed, NezhaV2SportsMode.Circle)
-                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, speed, NezhaV2SportsMode.Circle)
+                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, value, NezhaV2SportsMode.Circle)
+                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, value, NezhaV2SportsMode.Circle)
                 } else {
-                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CW, speed, NezhaV2SportsMode.Circle)
-                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CCW, speed, NezhaV2SportsMode.Circle)
+                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CW, value, NezhaV2SportsMode.Circle)
+                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CCW, value, NezhaV2SportsMode.Circle)
                 }
                 break;
             case NezhaV2NezhaV2DistanceAndAngleUnit.Degree:
                 if (verticallDirection == NezhaV2VerticallDirection.Up) {
-                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, speed, NezhaV2SportsMode.Degree)
-                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, speed, NezhaV2SportsMode.Degree)
+                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, value, NezhaV2SportsMode.Degree)
+                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, value, NezhaV2SportsMode.Degree)
                 } else {
-                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CW, speed, NezhaV2SportsMode.Degree)
-                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CCW, speed, NezhaV2SportsMode.Degree)
+                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CW, value, NezhaV2SportsMode.Degree)
+                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CCW, value, NezhaV2SportsMode.Degree)
                 }
                 break;
             case NezhaV2NezhaV2DistanceAndAngleUnit.Second:
                 if (verticallDirection == NezhaV2VerticallDirection.Up) {
-                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, speed, NezhaV2SportsMode.Second)
-                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, speed, NezhaV2SportsMode.Second)
+                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, value, NezhaV2SportsMode.Second)
+                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, value, NezhaV2SportsMode.Second)
                 } else {
-                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CW, speed, NezhaV2SportsMode.Second)
-                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CCW, speed, NezhaV2SportsMode.Second)
+                    nezhaV2.motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CW, value, NezhaV2SportsMode.Second)
+                    nezhaV2.motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CCW, value, NezhaV2SportsMode.Second)
                 }
                 break;
             case NezhaV2NezhaV2DistanceAndAngleUnit.cm:
-                let distanceCm = 360 * speed / degreeToDistance
+                let distanceCm = 360 * value / degreeToDistance
                 if (verticallDirection == NezhaV2VerticallDirection.Up) {
                     motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, distanceCm, NezhaV2SportsMode.Degree)
                     motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, distanceCm, NezhaV2SportsMode.Degree)
@@ -534,7 +535,7 @@ namespace nezhaV2 {
                 }
                 break;
             case NezhaV2NezhaV2DistanceAndAngleUnit.inch:
-                let distanceIrch = 360 * speed / degreeToDistance
+                let distanceIrch = 360 * value / degreeToDistance
                 if (verticallDirection == NezhaV2VerticallDirection.Up) {
                     motorSpeed(motorLeftGlobal, NezhaV2MovementDirection.CCW, distanceIrch, NezhaV2SportsMode.Degree)
                     motorSpeed(motorRightGlobal, NezhaV2MovementDirection.CW, distanceIrch, NezhaV2SportsMode.Degree)

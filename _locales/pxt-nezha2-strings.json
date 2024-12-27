@@ -13,7 +13,7 @@
     "NezhaV2ServoMotionMode.CCW|block": "counterclockwise",
     "NezhaV2VerticallDirection.UP|block": "forward",
     "NezhaV2VerticallDirection.DOWM|block": "backward",
-    "nezhaV2.motorSpeed|block": "set %NezhaV2MotorPostion to run %NezhaV2MovementDirection %speed  %NezhaV2SportsMode",
+    "nezhaV2.motorSpeed|block": "set %NezhaV2MotorPostion at %speed to run %NezhaV2MovementDirection %value  %NezhaV2SportsMode || %delayMode",
     "nezhaV2.goToAbsolutePosition|block": "set %NezhaV2MotorPostion to rotate %NezhaV2ServoMotionMode at angle %targetAngle",
     "nezhaV2.nezha2MotorStart|block": "setting %NezhaV2MotorPostion to start the motor in %NezhaV2MovementDirection",
     "nezhaV2.nezha2MotorStop|block": "set %NezhaV2MotorPostion shutting down the motor",

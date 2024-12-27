@@ -114,16 +114,15 @@ namespace nezhaV2 {
     }
 
     export function motorDelay(value: number, motorFunction: NezhaV2SportsMode) {
-        let now = input.runningTime();
         let delayTime = 0;
         if (value == 0 || servoSpeedGlobal == 0) {
             return;
         } else if (motorFunction == NezhaV2SportsMode.Circle) {
-            delayTime = now + value * 360000.0 / servoSpeedGlobal + 500;
+            delayTime = value * 360000.0 / servoSpeedGlobal + 500;
         } else if (motorFunction == NezhaV2SportsMode.Second) {
-            delayTime = now + (value * 1000);
+            delayTime = (value * 1000);
         } else if (motorFunction == NezhaV2SportsMode.Degree) {
-            delayTime = now + value * 1000.0 / servoSpeedGlobal + 500;
+            delayTime = value * 1000.0 / servoSpeedGlobal + 500;
         }
         basic.pause(delayTime);
 
@@ -151,7 +150,7 @@ namespace nezhaV2 {
     }
 
     export function move(motor: NezhaV2MotorPostion, direction: NezhaV2MovementDirection, value: number, motorFunction: NezhaV2SportsMode): void {
-        
+
         let buf = pins.createBuffer(8);
         buf[0] = 0xFF;
         buf[1] = 0xF9;
@@ -162,7 +161,7 @@ namespace nezhaV2 {
         buf[6] = motorFunction;
         buf[7] = (value >> 0) & 0XFF;
         pins.i2cWriteBuffer(i2cAddr, buf);
-        
+
     }
 
 

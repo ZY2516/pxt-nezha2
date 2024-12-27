@@ -241,6 +241,7 @@ namespace nezhaV2 {
         buf[6] = 0xF5;
         buf[7] = 0x00;
         pins.i2cWriteBuffer(i2cAddr, buf);
+        basic.pause(0.01);
     }
 
     /**

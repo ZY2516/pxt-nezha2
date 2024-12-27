@@ -356,7 +356,7 @@ namespace nezhaV2 {
         delayMs(4)
         let ServoSpeed1Arr = pins.i2cReadBuffer(i2cAddr, 2);
         let Servo1Speed = (ServoSpeed1Arr[1] << 8) | (ServoSpeed1Arr[0]);
-        return Math.floor(Servo1Speed * 1.0 / 36) * 0.1;
+        return Math.floor(Servo1Speed / 3.6) * 0.01;
     }
 
     /**

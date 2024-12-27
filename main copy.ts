@@ -113,7 +113,7 @@ namespace nezhaV2 {
         }
     }
 
-    export function motorDelay(value: number, motorFunction: NezhaV2SportsMode) {
+    function motorDelay(value: number, motorFunction: NezhaV2SportsMode) {
         let delayTime = 0;
         if (value == 0 || servoSpeedGlobal == 0) {
             return;
@@ -141,15 +141,15 @@ namespace nezhaV2 {
     //% block="set %NezhaV2MotorPostion at %speed to run %NezhaV2MovementDirection %value %NezhaV2SportsMode || %delayMode"
     //% inlineInputMode=inline
     //% weight=407 
-    export function motorSpeed(motor: NezhaV2MotorPostion, speed: number, direction: NezhaV2MovementDirection, value: number, motorFunction: NezhaV2SportsMode, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
+    export function move(motor: NezhaV2MotorPostion, speed: number, direction: NezhaV2MovementDirection, value: number, motorFunction: NezhaV2SportsMode, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
         setServoSpeed(speed);
-        move(motor, direction, value, motorFunction);
+        __move(motor, direction, value, motorFunction);
         if (delayMode) {
             motorDelay(value, motorFunction);
         }
     }
 
-    export function move(motor: NezhaV2MotorPostion, direction: NezhaV2MovementDirection, value: number, motorFunction: NezhaV2SportsMode): void {
+    function __move(motor: NezhaV2MotorPostion, direction: NezhaV2MovementDirection, value: number, motorFunction: NezhaV2SportsMode): void {
 
         let buf = pins.createBuffer(8);
         buf[0] = 0xFF;
@@ -177,7 +177,7 @@ namespace nezhaV2 {
     //% block="set %NezhaV2MotorPostion to rotate %NezhaV2MovementDirection at angle %targetAngle || %delayMode  "
     //% targetAngle.min=0  targetAngle.max=360
     //% inlineInputMode=inline
-    export function goToAbsolutePosition(motor: NezhaV2MotorPostion, modePostion: NezhaV2ServoMotionMode, targetAngle: number, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
+    export function moveToAbsAngle(motor: NezhaV2MotorPostion, modePostion: NezhaV2ServoMotionMode, targetAngle: number, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
         while (targetAngle < 0) {
             targetAngle += 360
         }
@@ -230,7 +230,20 @@ namespace nezhaV2 {
     //% weight=404
     //% block="set %NezhaV2MotorPostion shutting down the motor"
     //% speed.min=0  speed.max=100
-    export function nezha2MotorStop(motor: NezhaV2MotorPostion): void {
+    export function stop(motor: NezhaV2MotorPostion): void {
+        let buf = pins.createBuffer(8)
+        buf[0] = 0xFF;
+        buf[1] = 0xF9;
+        buf[2] = motor;
+        buf[3] = 0x00;
+        buf[4] = 0x5F;
+        buf[5] = 0x00;
+        buf[6] = 0xF5;
+        buf[7] = 0x00;
+        pins.i2cWriteBuffer(i2cAddr, buf);
+    }
+
+    function __start(): void {
         let buf = pins.createBuffer(8)
         buf[0] = 0xFF;
         buf[1] = 0xF9;
@@ -473,7 +486,8 @@ namespace nezhaV2 {
     //% weight=403
     //%block="Combination Motor Move at %speed to %VerticallDirection %value %SportsMode "
     //% speed.min=0  speed.max=100
-    export function CombinationServoVerticallDirectionMove(speed: number, verticallDirection: NezhaV2VerticallDirection, value: number, MotorFunction: NezhaV2NezhaV2DistanceAndAngleUnit): void {
+    //% inlineInputMode=inline
+    export function comboMove(speed: number, verticallDirection: NezhaV2VerticallDirection, value: number, MotorFunction: NezhaV2NezhaV2DistanceAndAngleUnit): void {
         setServoSpeed(speed)
         let motorFunction;
         switch (MotorFunction) {

@@ -172,7 +172,7 @@ namespace nezhaV2 {
         move(motor, direction, motorFunction, value, delayMode);
     }
 
-    function move(motor: NezhaV2MotorPostion, direction: NezhaV2MovementDirection, motorFunction: NezhaV2SportsMode, value: number, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
+    export function move(motor: NezhaV2MotorPostion, direction: NezhaV2MovementDirection, motorFunction: NezhaV2SportsMode, value: number, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
         if (delayMode) {
             motorDelay(motor, value, motorFunction);
         }

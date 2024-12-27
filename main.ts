@@ -117,24 +117,19 @@ namespace nezhaV2 {
     export function motorDelay(motor: NezhaV2MotorPostion, speed: number, motorFunction: NezhaV2SportsMode) {
 
         let now = input.runningTime();
-        let motorWorkdoneTime = motorWorkdoneTimeArr[motor - 1];
-        if (now < motorWorkdoneTime) {
-            // basic.pause(motorWorkdoneTime - now);
-            delayMs(motorWorkdoneTime - now);
-            now = input.runningTime();
-        }
-
+        let delayTime = motorWorkdoneTimeArr[motor - 1] - now;
+        now = Math.max(now, motorWorkdoneTimeArr[motor - 1]);
         if (speed == 0 || servoSpeedGlobal == 0) {
-            motorWorkdoneTimeArr[motor - 1] = 0;
-            return;
-        }
-
-        if (motorFunction == NezhaV2SportsMode.Circle) {
+            // motorWorkdoneTimeArr[motor - 1] = 0;
+        } else if (motorFunction == NezhaV2SportsMode.Circle) {
             motorWorkdoneTimeArr[motor - 1] = now + speed * 360000.0 / servoSpeedGlobal + 500;
         } else if (motorFunction == NezhaV2SportsMode.Second) {
             motorWorkdoneTimeArr[motor - 1] = now + (speed * 1000);
         } else if (motorFunction == NezhaV2SportsMode.Degree) {
             motorWorkdoneTimeArr[motor - 1] = now + speed * 1000.0 / servoSpeedGlobal + 500;
+        }
+        if (delayTime > 0) {
+            basic.pause(delayTime);
         }
 
     }
@@ -163,7 +158,7 @@ namespace nezhaV2 {
         else {
             motorDelay(motor, 0, 1)
         }
-        if(speed > 0){
+        if (speed > 0) {
             setServoSpeed(speed);
         }
         let buf = pins.createBuffer(8);
@@ -173,7 +168,7 @@ namespace nezhaV2 {
         buf[3] = direction;
         buf[4] = 0x70;
         buf[5] = (value >> 8) & 0XFF;
-        buf[6] = motorFunction; 
+        buf[6] = motorFunction;
         buf[7] = (value >> 0) & 0XFF;
         pins.i2cWriteBuffer(i2cAddr, buf);
     }
@@ -453,9 +448,9 @@ namespace nezhaV2 {
     //%block="Set %speed\\% speed and move %NezhaV2VerticallDirection"
     //% speed.min=0  speed.max=100
     export function combinationMotorNezhaV2VerticallDirectionMove(speed: number, verticallDirection: NezhaV2VerticallDirection): void {
-        if(speed < 0){
+        if (speed < 0) {
             speed = 0;
-        }else if(speed > 100){
+        } else if (speed > 100) {
             speed = 100;
         }
         switch (verticallDirection) {

@@ -22,7 +22,7 @@
     "NezhaV2ServoMotionMode.CCW|block": "逆时针",
     "NezhaV2VerticallDirection.Up|block": "前",
     "NezhaV2VerticallDirection.Down|block": "后",
-    "nezhaV2.motorSpeed|block": "设置%NezhaV2MotorPostion以%speed \\%速度%NezhaV2MovementDirection运行%value %NezhaV2SportsMode ||%delayMode ",
+    "nezhaV2.motorSpeed|block": "设置%NezhaV2MotorPostion以%speed \\%速度 %NezhaV2MovementDirection 运行 %value %NezhaV2SportsMode ||%delayMode ",
     "nezhaV2.goToAbsolutePosition|block": " 设置%NezhaV2MotorPostion 以 %NezhaV2MovementDirection 转至角度 %targetAngle ||%delayMode ",
     "nezhaV2.nezha2MotorStart|block": " 设置%NezhaV2MotorPostion 以%NezhaV2MovementDirection 启动电机",
     "nezhaV2.nezha2MotorStop|block": "设置%NezhaV2MotorPostion 关闭电机",

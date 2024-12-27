@@ -148,7 +148,7 @@ namespace nezhaV2 {
      * @returns This function does not return any value.
      */
     //% group="Basic functions"
-    //% block="set %NezhaV2MotorPostion at %speed to run %NezhaV2MovementDirection %value  %NezhaV2SportsMode || %delayMode"
+    //% block="set %NezhaV2MotorPostion at %speed to run %value %NezhaV2MovementDirection  %NezhaV2SportsMode || %delayMode"
     //% inlineInputMode=inline
     //% weight=407 
     export function motorSpeed(motor: NezhaV2MotorPostion, speed: number, direction: NezhaV2MovementDirection, motorFunction: NezhaV2SportsMode, value: number, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {

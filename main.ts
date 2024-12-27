@@ -119,8 +119,7 @@ namespace nezhaV2 {
         let now = input.runningTime();
         let motorWorkdoneTime = motorWorkdoneTimeArr[motor - 1];
         if (now < motorWorkdoneTime) {
-            // basic.pause(motorWorkdoneTime - now);
-            delayMs(motorWorkdoneTime - now)
+            basic.pause(motorWorkdoneTime - now);
             now = input.runningTime();
         }
 

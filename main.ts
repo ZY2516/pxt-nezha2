@@ -192,6 +192,7 @@ namespace nezhaV2 {
         buf[6] = modePostion;
         buf[7] = (targetAngle >> 0) & 0XFF;
         pins.i2cWriteBuffer(i2cAddr, buf);
+        basic.pause(0.01);
         if (delayMode) {
             motorDelay(0.5, NezhaV2SportsMode.Second)
         }

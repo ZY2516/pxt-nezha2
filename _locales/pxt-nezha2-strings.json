@@ -23,7 +23,7 @@
     "nezhaV2.readServoAbsoluteSpeed|block": "%NezhaV2MotorPostion speed (laps/sec)",
     "nezhaV2.servoPostionReset|block": "set servo %NezhaV2MotorPostion to zero",
     "nezhaV2.servoRelativePostionReset|block": "set servo %NezhaV2MotorPostion relative angular to zero",
-    "nezhaV2.runningMotorToeSpeed|block": "set the running motor to left wheel %NezhaV2MotorPostionLeft right wheel %MotorPostionRight",
+    "nezhaV2.setRunningMotor|block": "set the running motor to left wheel %NezhaV2MotorPostionLeft right wheel %MotorPostionRight",
     "nezhaV2.setMotionSpeed|block": "set the speed to %speed \\%",
     "nezhaV2.stopCombinationMotor|block": "stop movement",
     "nezhaV2.setSpeedfLeftRightWheel|block": "set the left wheel speed at %speedleft \\%, right wheel speed at %speedright \\% and start the motor",

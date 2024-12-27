@@ -33,7 +33,7 @@
     "nezhaV2.readServoAbsoluteSpeed|block": "%NezhaV2MotorPostion 速度 (圈/秒)",
     "nezhaV2.servoPostionReset|block": "设置电机%NezhaV2MotorPostion归零",
     "nezhaV2.servoRelativePostionReset|block": "设置电机%NezhaV2MotorPostion相对角度为零",
-    "nezhaV2.runningMotorToeSpeed|block": "将运转电机设置为左轮%NezhaV2MotorPostionLeft右轮%NezhaV2MotorPostionRight ",
+    "nezhaV2.setRunningMotor|block": "将运转电机设置为左轮%NezhaV2MotorPostionLeft右轮%NezhaV2MotorPostionRight ",
     "nezhaV2.CombinationMotorSpeed|block": "向%HorizontalDirection移动 %horizontalDirection %NezhaV2SportsMode",
     "nezhaV2.CombinationServoSpeed|block": "开始向%horizontalDirection移动 ",
     "nezhaV2.stopCombinationMotor|block": "停止运动",

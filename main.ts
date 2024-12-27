@@ -133,7 +133,7 @@ namespace nezhaV2 {
         } else if (motorFunction == NezhaV2SportsMode.Second) {
             motorWorkdoneTimeArr[motor - 1] = now + (speed * 1000);
         } else if (motorFunction == NezhaV2SportsMode.Degree) {
-            motorWorkdoneTimeArr[motor -] = now + speed * 1000.0 / servoSpeedGlobal + 500;
+            motorWorkdoneTimeArr[motor - 1] = now + speed * 1000.0 / servoSpeedGlobal + 500;
         }
 
     }

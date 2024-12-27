@@ -151,7 +151,7 @@ namespace nezhaV2 {
     //% block="set %NezhaV2MotorPostion at %speed to run %value %NezhaV2MovementDirection  %NezhaV2SportsMode || %delayMode"
     //% inlineInputMode=inline
     //% weight=407 
-    export function motorSpeed(motor: NezhaV2MotorPostion, speed: number, direction: NezhaV2MovementDirection, motorFunction: NezhaV2SportsMode, value: number, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
+    export function motorSpeed(motor: NezhaV2MotorPostion, speed: number, direction: NezhaV2MovementDirection, value: number, motorFunction: NezhaV2SportsMode, delayMode: NezhaV2DelayMode = NezhaV2DelayMode.AutoDelayStatus): void {
         setServoSpeed(speed);
         // if (delayMode) {
         //     motorDelay(motor, value, motorFunction);

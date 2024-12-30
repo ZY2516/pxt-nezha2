@@ -18,7 +18,7 @@
     "nezhaV2.ServoMotionMode.CCW|block": "逆时针",
     "nezhaV2.VerticallDirection.Up|block": "前",
     "nezhaV2.VerticallDirection.Down|block": "后",
-    "nezhaV2.move|block": "设置%motor以%speed \\%速度 %direction 运行 %value %mode ||%isDelay ",
+    "nezhaV2.move|block": "设置%motor 以%speed \\%速度 %direction 运行 %value %mode ||%isDelay ",
     "nezhaV2.moveToAbsAngle|block": " 设置%motor 以 %turnMode 转至角度 %angle ||%isDelay ",
     "nezhaV2.stop|block": "设置%motor 关闭电机",
     "nezhaV2.start|block": "将 %motor 速度设置为 %speed \\%并启动电机",

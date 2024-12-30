@@ -2,13 +2,13 @@
 //% color=#ff0011  icon="\uf06d" block="nezhaV2" blockId="nezhaV2"
 namespace nezhaV2 {
 
-    enum MovementDirection {
+    export enum MovementDirection {
         //%block="clockwise"
         CW = 1,
         //%block="counterclockwise"
         CCW = 2
     }
-    enum ServoMotionMode {
+    export enum ServoMotionMode {
         //%block="clockwise"
         CW = 2,
         //%block="counterclockwise"
@@ -17,13 +17,13 @@ namespace nezhaV2 {
         ShortPath = 1
     }
     
-    enum DelayMode {
+    export enum DelayMode {
         //%block="automatic delay"
         AutoDelayStatus = 1,
         //%block="no delay"
         NoDelay = 0
     }
-    enum SportsMode {
+    export enum SportsMode {
         //%block="degrees"
         Degree = 2,
         //%block="turns"
@@ -33,21 +33,21 @@ namespace nezhaV2 {
     }
     
     
-    enum VerticallDirection {
+    export enum VerticallDirection {
         //%block="forward"
         Up = 1,
         //%block="backward"
         Down = 2
     }
     
-    enum Uint {
+    export enum Uint {
         //%block="cm"
         cm = 1,
         //%block="inch"
         inch = 2
     }
     
-    enum DistanceAndAngleUnit {
+    export enum DistanceAndAngleUnit {
         //%block="degrees"
         Degree = 2,
         //%block="turns"
@@ -60,7 +60,7 @@ namespace nezhaV2 {
         inch = 5
     }
     
-    enum MotorPostion {
+    export enum MotorPostion {
         //%block="M1"
         M1 = 1,
         //%block="M2"
@@ -293,7 +293,7 @@ namespace nezhaV2 {
 
     //% group="Application functions"
     //% weight=410
-    //%block="set the running motor to left wheel %motor_l right wheel %motor_r"
+    //%block="set the running motor to left wheel %MotorPostion right wheel %MotorPostion"
     export function setComboMotor(motor_l: MotorPostion, motor_r: MotorPostion): void {
         motorLeftGlobal = motor_l;
         motorRightGlobal = motor_r;

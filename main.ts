@@ -293,7 +293,7 @@ namespace nezhaV2 {
 
     //% group="Application functions"
     //% weight=410
-    //%block="set the running motor to left wheel %MotorPostion right wheel %MotorPostion"
+    //%block="set the running motor to left wheel %motor_l right wheel %motor_r"
     export function setComboMotor(motor_l: MotorPostion, motor_r: MotorPostion): void {
         motorLeftGlobal = motor_l;
         motorRightGlobal = motor_r;

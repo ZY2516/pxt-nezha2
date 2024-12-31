@@ -18,7 +18,7 @@
     "nezhaV2.ServoMotionMode.CCW|block": "시계반대방향",
     "nezhaV2.VerticallDirection.Up|block": "전진",
     "nezhaV2.VerticallDirection.Down|block": "후진",
-    "nezhaV2.move|block": "%motor을 %speed 속도로 %direction 으로 %value %mode 로 설정 ||%isDelay",
+    "nezhaV2.move|block": "%motor을 %speed \\%속도로 %direction 으로 %value %mode 로 설정 ||%isDelay",
     "nezhaV2.moveToAbsAngle|block": "%motor 을 %turnMode 으로 각도 %angle 도 설정 ||%isDelay",
     "nezhaV2.stop|block": "%motor 모터 멈추기",
     "nezhaV2.start|block": "%motor 의 속도를 %speed \\%로 설정",

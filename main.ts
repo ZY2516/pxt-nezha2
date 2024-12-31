@@ -149,7 +149,7 @@ namespace nezhaV2 {
         buf[6] = turnMode;
         buf[7] = (angle >> 0) & 0XFF;
         pins.i2cWriteBuffer(i2cAddr, buf);
-        basic.pause(0.01);// 等待不能删除，否则有BUG
+        delayMs(4);// 等待不能删除，且禁止有其他任务插入，否则有BUG
         if (isDelay) {
             motorDelay(0.5, SportsMode.Second)
         }

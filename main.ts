@@ -187,7 +187,7 @@ namespace nezhaV2 {
 
     //% group="Basic functions"
     //% weight=403
-    //% block="set the speed of %motor to %speed\\% and start the motor"
+    //% block="set the speed of %motor to %speed \\% and start the motor"
     //% speed.min=-100  speed.max=100
     export function start(motor: MotorPostion, speed: number): void {
         let direction = speed > 0 ? MovementDirection.CW : MovementDirection.CCW
@@ -377,7 +377,7 @@ namespace nezhaV2 {
     //%block="set the left wheel speed at %speed_l \\%, right wheel speed at %speed_r \\% and start the motor"
     //% speed_l.min=-100  speed_l.max=100 speed_r.min=-100  speed_r.max=100
     export function comboStart(speed_l: number, speed_r: number): void {
-        start(motorLeftGlobal, speed_l);
+        start(motorLeftGlobal, -speed_l);
         start(motorRightGlobal, speed_r);
     }
 

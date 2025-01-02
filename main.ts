@@ -329,9 +329,9 @@ namespace nezhaV2 {
     export function setWheelPerimeter(value: number, unit: Uint): void {
         if (unit == Uint.inch) {
             degreeToDistance = value * 2.54
+        }else{
+            degreeToDistance = value
         }
-        degreeToDistance = value
-
     }
 
     //% group="Application functions"

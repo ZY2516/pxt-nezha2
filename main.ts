@@ -80,22 +80,6 @@ namespace nezhaV2 {
     let motorRightGlobal = 0
     let degreeToDistance = 0
 
-    function validateNonNegative(value: number): number {
-        if (value < 0) {
-            console.warn("Value cannot be less than 0, setting to 0.");
-            value = 0;
-        }
-        return value;
-    }
-
-    function validateSpeed(value: number): number {
-        if (value < 0 || value > 100) {
-            console.warn("Value cannot be less than 0 or greater than 100, setting to 0.");
-            value = 0;
-        }
-        return value;
-    }
-
     export function delayMs(ms: number): void {
         let time = input.runningTime() + ms
         while (time >= input.runningTime()) {
@@ -123,9 +107,12 @@ namespace nezhaV2 {
     //% inlineInputMode=inline
     //% speed.min=0  speed.max=100
     //% weight=407 
-    export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {// 速度不能为负数
-        // setServoSpeed(speed);
-        value = validateNonNegative(value);
+    export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {
+        if (speed <= 0 || value <= 0) {
+            // 速度和运行值不能小于等于0
+            return;
+        }
+        setServoSpeed(speed);
         __move(motor, direction, value, mode);
         if (isDelay) {
             motorDelay(value, mode);
@@ -150,7 +137,7 @@ namespace nezhaV2 {
     //% group="Basic functions"
     //% weight=406
     //% block="set %motor to rotate %turnMode at angle %angle || %isDelay  "
-    //% targetAngle.min=0  targetAngle.max=359
+    //% angle.min=0  angle.max=359
     //% inlineInputMode=inline
     export function moveToAbsAngle(motor: MotorPostion, turnMode: ServoMotionMode, angle: number, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {
         while (angle < 0) {
@@ -176,7 +163,6 @@ namespace nezhaV2 {
     //% group="Basic functions"
     //% weight=404
     //% block="set %motor shutting down the motor"
-    //% speed.min=0  speed.max=100
     export function stop(motor: MotorPostion): void {
         let buf = pins.createBuffer(8)
         buf[0] = 0xFF;
@@ -297,7 +283,6 @@ namespace nezhaV2 {
         if(speed < 0) speed = 0;
         speed *= 9;
         servoSpeedGlobal = speed;
-        console.log("setServoSpeed:" + speed);
         let buf = pins.createBuffer(8)
         buf[0] = 0xFF;
         buf[1] = 0xF9;
@@ -360,6 +345,9 @@ namespace nezhaV2 {
     //% speed.min=0  speed.max=100
     //% inlineInputMode=inline
     export function comboMove(speed: number, direction: VerticallDirection, value: number, uint: DistanceAndAngleUnit): void {
+        if(speed <= 0){
+            return;
+        }
         setServoSpeed(speed)
         let mode;
         switch (uint) {

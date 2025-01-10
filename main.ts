@@ -118,7 +118,6 @@ namespace nezhaV2 {
     export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {// 速度不能为负数
         setServoSpeed(speed);
         value = validateNonNegative(value);
-        console.log
         __move(motor, direction, value, mode);
         if (isDelay) {
             motorDelay(value, mode);

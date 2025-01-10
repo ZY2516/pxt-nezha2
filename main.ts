@@ -194,6 +194,11 @@ namespace nezhaV2 {
     //% block="set the speed of %motor to %speed \\% and start the motor"
     //% speed.min=-100  speed.max=100
     export function start(motor: MotorPostion, speed: number): void {
+        if (speed < -100) {
+            speed = -100
+        }else if (speed > 100) {
+            speed = 100
+        }
         let direction = speed > 0 ? MovementDirection.CW : MovementDirection.CCW
         __start(motor, direction, Math.abs(speed))
     }
@@ -332,6 +337,9 @@ namespace nezhaV2 {
     //% weight=404
     //%block="Rotate the motor once and set it to %value %unit"
     export function setWheelPerimeter(value: number, unit: Uint): void {
+        if(value < 0){
+            value = 0;
+        }
         if (unit == Uint.inch) {
             degreeToDistance = value * 2.54
         }else{

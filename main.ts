@@ -80,6 +80,14 @@ namespace nezhaV2 {
     let motorRightGlobal = 0
     let degreeToDistance = 0
 
+    function validateNonNegative(value: number): number {
+        if (value < 0) {
+            console.warn("Value cannot be less than 0, setting to 0.");
+            value = 0;
+        }
+        return value;
+    }
+
     export function delayMs(ms: number): void {
         let time = input.runningTime() + ms
         while (time >= input.runningTime()) {
@@ -106,7 +114,6 @@ namespace nezhaV2 {
     //% block="set %motor at %speed\\%to run %direction %value %mode || %isDelay"
     //% inlineInputMode=inline
     //% speed.min=0  speed.max=100
-    //% value.min=0
     //% weight=407 
     export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {// 速度不能为负数
         setServoSpeed(speed);

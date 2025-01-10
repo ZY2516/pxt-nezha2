@@ -114,6 +114,7 @@ namespace nezhaV2 {
     //% block="set %motor at %speed\\%to run %direction %value %mode || %isDelay"
     //% inlineInputMode=inline
     //% speed.min=0  speed.max=100
+    //% value.validator="validateNonNegative"
     //% weight=407 
     export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {// 速度不能为负数
         setServoSpeed(speed);

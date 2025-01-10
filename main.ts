@@ -105,8 +105,10 @@ namespace nezhaV2 {
     //% group="Basic functions"
     //% block="set %motor at %speed\\%to run %direction %value %mode || %isDelay"
     //% inlineInputMode=inline
+    //% speed.min=0  speed.max=100
+    //% value.min=0
     //% weight=407 
-    export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {
+    export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {// 速度不能为负数
         setServoSpeed(speed);
         __move(motor, direction, value, mode);
         if (isDelay) {
@@ -276,8 +278,9 @@ namespace nezhaV2 {
     }
 
     export function setServoSpeed(speed: number): void {
-        speed *= 9
-        servoSpeedGlobal = speed
+        if(speed < 0) speed = 0;
+        speed *= 9;
+        servoSpeedGlobal = speed;
         let buf = pins.createBuffer(8)
         buf[0] = 0xFF;
         buf[1] = 0xF9;

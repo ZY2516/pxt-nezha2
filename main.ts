@@ -289,6 +289,7 @@ namespace nezhaV2 {
         if(speed < 0) speed = 0;
         speed *= 9;
         servoSpeedGlobal = speed;
+        console.log("setServoSpeed:" + speed);
         let buf = pins.createBuffer(8)
         buf[0] = 0xFF;
         buf[1] = 0xF9;

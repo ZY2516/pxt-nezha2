@@ -88,6 +88,14 @@ namespace nezhaV2 {
         return value;
     }
 
+    function validateSpeed(value: number): number {
+        if (value < 0 || value > 100) {
+            console.warn("Value cannot be less than 0 or greater than 100, setting to 0.");
+            value = 0;
+        }
+        return value;
+    }
+
     export function delayMs(ms: number): void {
         let time = input.runningTime() + ms
         while (time >= input.runningTime()) {
@@ -116,7 +124,7 @@ namespace nezhaV2 {
     //% speed.min=0  speed.max=100
     //% weight=407 
     export function move(motor: MotorPostion, speed: number, direction: MovementDirection, value: number, mode: SportsMode, isDelay: DelayMode = DelayMode.AutoDelayStatus): void {// 速度不能为负数
-        setServoSpeed(speed);
+        // setServoSpeed(speed);
         value = validateNonNegative(value);
         __move(motor, direction, value, mode);
         if (isDelay) {
